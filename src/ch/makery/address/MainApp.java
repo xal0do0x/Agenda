@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import ch.makery.address.model.Person;
 import ch.makery.address.view.PersonOverviewController;
 import ch.makery.address.view.PersonEditDialogController;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 
 /**
@@ -57,6 +58,8 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Aplicacion Direcciones");
          
+       // this.primaryStage.getIcons().add(new Image("images/agenda.png"));
+        
         initRootLayout();
         
         showPersonOverview();

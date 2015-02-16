@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.PersonEditDialogController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@JMetroDarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.PersonEditDialogController">
    <children>
       <GridPane layoutX="32.0" layoutY="28.0" prefHeight="293.0" prefWidth="518.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
         <columnConstraints>
@@ -36,9 +36,9 @@
             <TextField fx:id="birthdayField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
-      <HBox layoutX="318.0" layoutY="347.0" prefHeight="25.0" prefWidth="134.0" spacing="10.0" AnchorPane.rightAnchor="60.0">
+      <HBox layoutX="318.0" layoutY="347.0" prefHeight="33.0" prefWidth="202.0" spacing="10.0" AnchorPane.rightAnchor="40.0">
          <children>
-            <Button layoutX="318.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleOk" text="Ok" />
+            <Button layoutX="318.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="33.0" prefWidth="72.0" text="Ok" />
             <Button layoutX="405.0" layoutY="347.0" mnemonicParsing="false" onAction="#handleCancel" text="Cancelar" />
          </children>
       </HBox>
