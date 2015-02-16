@@ -20,10 +20,15 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import ch.makery.address.model.Person;
+import ch.makery.address.model.PersonListWrapper;
 import ch.makery.address.view.PersonOverviewController;
 import ch.makery.address.view.PersonEditDialogController;
+import java.io.File;
+import java.util.prefs.Preferences;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
 
 /**
  *
@@ -58,7 +63,7 @@ public class MainApp extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Aplicacion Direcciones");
          
-       // this.primaryStage.getIcons().add(new Image("images/agenda.png"));
+        this.primaryStage.getIcons().add(new Image("file:images/agenda.png"));
         
         initRootLayout();
         
@@ -156,4 +161,59 @@ public class MainApp extends Application {
         launch(args);
     }
     
+    /**
+     * Retorna el archivo de persona de nuestra preferencia
+     * 
+     * @return
+     */
+    public File getPersonFilePath(){
+        Preferences prefs =  Preferences.userNodeForPackage(MainApp.class);
+        String filePath = prefs.get("filePath",null);
+        if(filePath!=null){
+            return new File(filePath);
+        }else{
+            return null;
+        }
+    }
+    
+    /**
+     * Seteamos la direccion del archivo actual cargado. El path es persistido
+     * en el registro del SO
+     * 
+     * @param file  el documento o null para remover el path
+     */
+    public void setPersonFilePath(File file){
+        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+        if(file!=null){
+            prefs.put("filePath", file.getPath());
+            
+            //Actualiza el stage del file
+            primaryStage.setTitle("AgendaApp - "+file.getName());
+        }else{
+            prefs.remove("filePath");
+            
+            //Actualiza el stage del file
+            primaryStage.setTitle("AgendaApp");
+        }
+    }
+    
+    /**
+     * Carga la data de personas de un archivo especifico. La data actual sera
+     * reemplazada.
+     * 
+     * @param file
+     */
+    public void loaderPersonDataFromFile(File file){
+        try {
+            JAXBContext context = JAXBContext
+                    .newInstance(PersonListWrapper.class);
+            Unmarshaller um = context.createUnmarshaller();
+            
+            //Leer xml del archivo y 
+            PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
+            
+            
+        } catch (Exception e) {
+        }
+    }
 }
