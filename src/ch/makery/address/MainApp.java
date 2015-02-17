@@ -29,6 +29,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
+import org.controlsfx.dialog.Dialogs;
 
 /**
  *
@@ -212,8 +213,27 @@ public class MainApp extends Application {
             //Leer xml del archivo y 
             PersonListWrapper wrapper = (PersonListWrapper) um.unmarshal(file);
             
+            personData.clear();
+            personData.addAll(wrapper.getPersons());
             
-        } catch (Exception e) {
+            //Guardar el path del archivo de el registro
+            setPersonFilePath(file);
+        } catch (Exception e) {//atrapa cualquier excepcion
+            Dialogs.create()
+                    .title("Error")
+                    .masthead("No se puede la data del archivo file:\n"+file.getPath())
+                    .showException(e);
         }
     }
+    
+    /**
+     * Guarda la data actual de la persona a un file especifico
+     * 
+     * @param file
+     */
+    public void savePersonDataToFile(File file){
+        
+    }
+    
+    
 }
